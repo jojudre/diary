@@ -9,7 +9,13 @@ const Plus = ({ className }: { className?: string }) => (
         xmlns="http://www.w3.org/2000/svg"
         className={className}
     >
-        <path d="M4 12H9M12 12H20M12 4V20" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path
+            d="M4 12H9M12 12H20M12 4V20"
+            stroke="#fff"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
     </svg>
 );
 

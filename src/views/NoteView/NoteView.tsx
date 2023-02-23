@@ -1,47 +1,50 @@
 /** @format */
 
-import React, { FC, useMemo } from "react";
-import { OutputData } from "@editorjs/editorjs";
-import dynamic from "next/dynamic";
-import css from "./NoteView.module.scss";
-import { useRouter } from "next/router";
-import BackButton from "components/BackButton";
-import { useDiaryState } from "providers";
+import React, { FC, useMemo } from 'react';
+import { OutputData } from '@editorjs/editorjs';
+import dynamic from 'next/dynamic';
+import css from './NoteView.module.scss';
+import { useRouter } from 'next/router';
+import BackButton from 'components/BackButton';
+import { useDiaryState } from 'providers';
 
-const EditorBlock = dynamic(() => import("components/Editor"), {
-  ssr: false,
+const EditorBlock = dynamic(() => import('components/Editor'), {
+    ssr: false,
 });
 
 const NoteView: FC = () => {
-  const router = useRouter();
-  const { id } = router.query;
-  
-  const { notes, updateNote } = useDiaryState();
+    const router = useRouter();
+    const { id } = router.query;
 
-  const currentNote = useMemo(() => notes.find((note) => note.id === id), [id]);
-console.log(currentNote)
-  const currentNoteContent: OutputData = useMemo(
-    () => (currentNote?.content ? JSON.parse(currentNote.content) : null),
-    [currentNote?.content]
-  );
+    const { notes, updateNote } = useDiaryState();
 
-  const handleNoteUpdate = (data: OutputData) => {
-    updateNote(id as string, JSON.stringify(data));
-  };
+    const currentNote = useMemo(
+        () => notes.find((note) => note.id === id),
+        [id]
+    );
+    console.log(currentNote);
+    const currentNoteContent: OutputData = useMemo(
+        () => (currentNote?.content ? JSON.parse(currentNote.content) : null),
+        [currentNote?.content]
+    );
 
-  return (
-    <div className={css.homePage}>
-      <BackButton />
-      <section className={css.content}>
-        <h2 className={css.date}>{currentNote?.createdAt}</h2>
-        <EditorBlock
-          data={currentNoteContent}
-          onChange={handleNoteUpdate}
-          holder='editorjs-container'
-        />
-      </section>
-    </div>
-  );
+    const handleNoteUpdate = (data: OutputData) => {
+        updateNote(id as string, JSON.stringify(data));
+    };
+
+    return (
+        <div className={css.homePage}>
+            <BackButton />
+            <section className={css.content}>
+                <h2 className={css.date}>{currentNote?.createdAt}</h2>
+                <EditorBlock
+                    data={currentNoteContent}
+                    onChange={handleNoteUpdate}
+                    holder="editorjs-container"
+                />
+            </section>
+        </div>
+    );
 };
 
 export default NoteView;

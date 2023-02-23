@@ -1,53 +1,52 @@
 @import '../../css/helpers/all.scss';
 
 .wrapper {
-  cursor: pointer;
-  font-size: 16px;
-  position: relative;
-  z-index: 100;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    z-index: 100;
 }
 
 .button {
-  border: none;
-  background-color: transparent;
-  padding: 0;
+    border: none;
+    background-color: transparent;
+    padding: 0;
 }
 
 .sortIcon {
-  color: $pink-dark;
-  cursor: pointer;
+    color: $pink-dark;
+    cursor: pointer;
 }
 
 .arrowIcon {
-  transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 .arrowDown {
-  transform: rotate(-90deg);
+    transform: rotate(-90deg);
 }
 
 .list {
-  position: absolute;
-  top: 0;
-  right: -50%;
-  background-color: $pink;
-  margin: 0;
-  border-radius: 8px;
-  padding: 20px 0;
-  list-style: none;
-  width: max-content;
-  color:  $white;
- 
+    position: absolute;
+    top: 0;
+    right: -50%;
+    background-color: $pink;
+    margin: 0;
+    border-radius: 8px;
+    padding: 20px 0;
+    list-style: none;
+    width: max-content;
+    color: $white;
 
-  > li:hover {
-    background-color: $gray-light;
-  }
+    > li:hover {
+        background-color: $gray-light;
+    }
 
-  > li {
-    padding: 5px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 5px;
-  }
+    > li {
+        padding: 5px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 5px;
+    }
 }

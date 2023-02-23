@@ -1,34 +1,38 @@
-import React, { FC, MouseEvent, useMemo } from "react";
+import React, { FC, MouseEvent, useMemo } from 'react';
 import { Note } from 'types';
-import EditorParser from "components/EditorParser";
+import EditorParser from 'components/EditorParser';
 import css from './NoteItem.module.scss';
-import Close from "icons/Close";
+import Close from 'icons/Close';
 
 type NoteProps = {
-  note: Note;
-  onNoteDelete: () => void;
+    note: Note;
+    onNoteDelete: () => void;
 };
 
-const NoteItem: FC<NoteProps> = ({
-  note,
-  onNoteDelete
-}) => {
-  const handleDeleteNote = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    onNoteDelete();
-  }
+const NoteItem: FC<NoteProps> = ({ note, onNoteDelete }) => {
+    const handleDeleteNote = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        onNoteDelete();
+    };
 
-  const editorData = useMemo(() => note.content && JSON.parse(note.content), [note.content])
+    const editorData = useMemo(
+        () => note.content && JSON.parse(note.content),
+        [note.content]
+    );
 
-  return (
-    <div className={css.note}>
-      <button type="button" onClick={handleDeleteNote} className={css.deleteButton}>
-          <Close />
-      </button>
-      <span className={css.title}>{note.createdAt}</span>
-      {note.content && <EditorParser data={editorData} />}
-    </div>
-  )
+    return (
+        <div className={css.note}>
+            <button
+                type="button"
+                onClick={handleDeleteNote}
+                className={css.deleteButton}
+            >
+                <Close />
+            </button>
+            <span className={css.title}>{note.createdAt}</span>
+            {note.content && <EditorParser data={editorData} />}
+        </div>
+    );
 };
 
 export default NoteItem;
