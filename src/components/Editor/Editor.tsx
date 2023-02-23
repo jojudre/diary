@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import EditorJS, { OutputData } from '@editorjs/editorjs';
 import { EDITOR_TOOLS } from './EditorTools';
-import css from './Editor.module.scss';
 
 type EditorBlockProps = {
   data?: OutputData;
@@ -37,7 +36,7 @@ const EditorBlock: FC<EditorBlockProps> = ({ data, onChange, holder }) => {
     };
   }, []);
 
-  return <div id={holder} className={css.container} />;
+  return <div id={holder} />;
 };
 
 export default memo(EditorBlock);

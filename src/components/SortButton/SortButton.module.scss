@@ -26,7 +26,7 @@
   transform: rotate(-90deg);
 }
 
-.list {
+.sortButtons {
   position: absolute;
   top: 0;
   right: -50%;
@@ -37,16 +37,24 @@
   list-style: none;
   width: max-content;
   color: $white;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
 
-  > li:hover {
-    background-color: $gray-light;
-  }
-
-  > li {
-    padding: 5px 20px;
+.sortButton {
+  cursor: pointer;
+  width: 100%;
+  padding: 5px 20px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 5px;
+    background: transparent;
+    border: none;
+    color: $white;
+
+  &:hover {
+    background-color: $gray-light;
   }
 }

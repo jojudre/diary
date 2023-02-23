@@ -70,8 +70,8 @@ const SortButton: FC<SortButtonProps> = ({
         <SortIcon className={css.sortIcon} />
       </button>
       {isOpen && (
-        <ul className={css.list}>
-          <li onClick={handleClickSortByCreated}>
+        <div className={css.sortButtons}>
+          <button type="button" onClick={handleClickSortByCreated} className={css.sortButton}>
             <span>
               <ArrowIcon
                 className={cn(css.arrowIcon, {
@@ -80,8 +80,8 @@ const SortButton: FC<SortButtonProps> = ({
               />
             </span>
             Creation date
-          </li>
-          <li onClick={handleClickSortByUpdated}>
+          </button>
+          <button type="button" onClick={handleClickSortByUpdated} className={css.sortButton}>
             <span>
               <ArrowIcon
                 className={cn(css.arrowIcon, {
@@ -90,8 +90,8 @@ const SortButton: FC<SortButtonProps> = ({
               />
             </span>
             Update date
-          </li>
-        </ul>
+          </button>
+        </div>
       )}
     </div>
   );
