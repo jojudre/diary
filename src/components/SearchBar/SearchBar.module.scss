@@ -1,0 +1,40 @@
+@import '../../css/helpers/all.scss';
+
+.wrap {
+  min-width: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  position: relative;
+
+  @include media(md) {
+      min-width: 400px;
+  }
+}
+
+.input {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $pink-dark;
+  padding: 0 0 5px 30px;
+  border-radius: 0;
+  outline: none;
+  color: $pink-dark;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.icon {
+  fill: none;
+  stroke: $pink-dark;
+  stroke-width: 2px;
+  stroke-linecap: square;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

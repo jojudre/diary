@@ -1,0 +1,68 @@
+@import '../../css/helpers/all.scss';
+
+.note {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  max-height: 300px;
+  position: relative;
+  height: 300px;
+  box-sizing: border-box;
+  font-size: 16px;
+
+  @include media(lg) {
+      font-size: 18px;
+  }
+}
+
+.title {
+  margin: 0;
+  display: -webkit-box;
+  max-width: 400px;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deleteButton {
+  cursor: pointer;
+  padding: 0;
+    background: transparent;
+    width: max-content;
+    border: 0;
+    position: absolute;
+    top: 15px;
+    height: 20px;
+
+    right: 15px;
+    z-index: 10;
+    cursor: pointer;
+
+    > svg {
+        width: 20px;
+        height: 20px;
+        @include media(md) {
+            height: 24px;
+            width: 24px;
+        }
+    }
+
+    @include media(md) {
+        height: 24px;
+    }
+
+    > svg > path {
+      transition: all 0.3s;
+
+        fill: $gray;
+        opacity: 0.5;
+    }
+
+    &:hover {
+        > svg > path {
+            opacity: 1;
+        }
+    }
+}

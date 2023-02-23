@@ -1,0 +1,64 @@
+@import '../../css/helpers/all.scss';
+
+.homePage {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+
+    @include media(md) {
+        padding: 40px 60px;
+    }
+
+    @include media(lg) {
+        padding: 40px 80px;
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.appTitle {
+    margin: 0;
+    color: $pink;
+    font-size: 16px;
+
+    @include media(sm) {
+        font-size: 20px;
+    }
+
+    @include media(md) {
+        font-size: 24px;
+    }
+
+    @include media(lg) {
+        font-size: 36px;
+    }
+}
+
+.notes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 60px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+
+    @include media(md) {
+        font-size: 20px;
+    }
+
+    @include media(lg) {
+        font-size: 24px;
+    }
+}
+
+.date {
+    text-align: center;
+}
