@@ -1,26 +1,26 @@
 @import '../../css/helpers/all.scss';
 
 .arrowBack {
-    background-color: $pink-dark;
-    box-shadow: 0px 10px 20px rgba(88, 126, 168, 0.05);
-    border-radius: 12px;
-    width: 84px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    transition: 0.3s;
-    cursor: pointer;
-    opacity: 0.8;
+  background-color: $pink-dark;
+  box-shadow: 0px 10px 20px rgba(88, 126, 168, 0.05);
+  border-radius: 12px;
+  width: 84px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: 0.3s;
+  cursor: pointer;
+  opacity: 0.8;
 
-    &:hover {
-        opacity: 1;
-    }
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .arrowBackIcon {
-    width: 16px;
-    height: 16px;
-    transform: rotate(180deg);
+  width: 16px;
+  height: 16px;
+  transform: rotate(180deg);
 }

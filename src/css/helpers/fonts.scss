@@ -1,49 +1,44 @@
 @font-face {
-    font-family: 'Avenir';
-    src: url('../assets/fonts/Avenir/avenirlt-book_1-webfont.woff2')
-            format('woff2'),
-        url('../assets/fonts/Avenir/avenirlt-book_1-webfont.woff')
-            format('woff');
-    font-weight: 200;
-    font-style: normal;
+  font-family: 'Avenir';
+  src: url('../assets/fonts/Avenir/avenirlt-book_1-webfont.woff2')
+      format('woff2'),
+    url('../assets/fonts/Avenir/avenirlt-book_1-webfont.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Avenir';
-    src: url('../assets/fonts/Avenir/avenirlt-light_1-webfont.woff2')
-            format('woff2'),
-        url('../assets/fonts/Avenir/avenirlt-light_1-webfont.woff')
-            format('woff');
-    font-weight: 300;
-    font-style: normal;
+  font-family: 'Avenir';
+  src: url('../assets/fonts/Avenir/avenirlt-light_1-webfont.woff2')
+      format('woff2'),
+    url('../assets/fonts/Avenir/avenirlt-light_1-webfont.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Avenir';
-    src: url('../assets/fonts/Avenir/avenirlt-roman_1-webfont.woff2')
-            format('woff2'),
-        url('../assets/fonts/Avenir/avenirlt-roman_1-webfont.woff')
-            format('woff');
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Avenir';
+  src: url('../assets/fonts/Avenir/avenirlt-roman_1-webfont.woff2')
+      format('woff2'),
+    url('../assets/fonts/Avenir/avenirlt-roman_1-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Avenir';
-    src: url('../assets/fonts/Avenir/avenirlt-medium_1-webfont.woff2')
-            format('woff2'),
-        url('../assets/fonts/Avenir/avenirlt-medium_1-webfont.woff')
-            format('woff');
-    font-weight: $font-weight-medium;
-    font-style: normal;
+  font-family: 'Avenir';
+  src: url('../assets/fonts/Avenir/avenirlt-medium_1-webfont.woff2')
+      format('woff2'),
+    url('../assets/fonts/Avenir/avenirlt-medium_1-webfont.woff') format('woff');
+  font-weight: $font-weight-medium;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Avenir';
-    src: url('../assets/fonts/Avenir/avenirlt-heavy_1-webfont.woff2')
-            format('woff2'),
-        url('../assets/fonts/Avenir/avenirlt-heavy_1-webfont.woff')
-            format('woff');
-    font-weight: $font-weight-black;
-    font-style: normal;
+  font-family: 'Avenir';
+  src: url('../assets/fonts/Avenir/avenirlt-heavy_1-webfont.woff2')
+      format('woff2'),
+    url('../assets/fonts/Avenir/avenirlt-heavy_1-webfont.woff') format('woff');
+  font-weight: $font-weight-black;
+  font-style: normal;
 }

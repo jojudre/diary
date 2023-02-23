@@ -1,12 +1,12 @@
 @import '../../css/helpers/all.scss';
 
 .container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: $pink-light;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $pink-light;
 }
 
 .content {
-    flex: 1;
+  flex: 1;
 }
