@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Note, OrderDirection } from 'types';
 import NoteItem from 'components/NoteItem';
 import AddNoteButton from 'components/AddNoteButton';
-import { searchInEditorText } from 'utils';
 import SearchBar from 'components/SearchBar';
 import SortButton from 'components/SortButton';
 import { useDiaryState } from 'providers';
@@ -11,18 +10,14 @@ import css from './HomeView.module.scss';
 
 const HomeView: FC = () => {
   const {
-    notes,
     searchValue,
     addNote,
     deleteNote,
     setSearchValue,
+    getFilteredNotes,
     sortByCreated,
     sortByUpdated,
   } = useDiaryState();
-
-  const handleNoteCreate = () => {
-    addNote();
-  };
 
   const handleNoteDelete = (id: string) => () => {
     deleteNote(id);
@@ -32,10 +27,7 @@ const HomeView: FC = () => {
     setSearchValue(value);
   };
 
-  const filteredNotes = useMemo(() => {
-    if (searchValue === '') return notes;
-    return notes.filter((note) => searchInEditorText(searchValue, note.content));
-  }, [notes, searchValue]);
+  const filteredNotes = useMemo(() => getFilteredNotes(searchValue), [searchValue]);
 
   const handleSortByCreated = (orderDirection: OrderDirection) => {
     sortByCreated(orderDirection);
@@ -68,7 +60,7 @@ const HomeView: FC = () => {
           </Link>
         ))}
       </div>
-      <AddNoteButton onAddNote={handleNoteCreate} />
+      <AddNoteButton onAddNote={addNote} />
     </div>
   );
 };

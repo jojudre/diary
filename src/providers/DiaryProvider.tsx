@@ -7,7 +7,9 @@ import React, {
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Note, OrderDirection, SortOrder } from 'types';
-import { formatDate, loadState, saveState } from 'utils';
+import {
+  formatDate, loadState, saveState, searchInEditorText
+} from 'utils';
 import { OutputData } from '@editorjs/editorjs';
 
 interface DiaryContextValue {
@@ -20,6 +22,7 @@ interface DiaryContextValue {
   setSearchValue: (value: string) => void;
   sortByCreated: (order: OrderDirection) => void;
   sortByUpdated: (order: OrderDirection) => void;
+  getFilteredNotes: (value: string) => Note[];
 }
 
 const DiaryContext = createContext<DiaryContextValue>({
@@ -35,6 +38,7 @@ const DiaryContext = createContext<DiaryContextValue>({
   setSearchValue: () => {},
   sortByCreated: () => {},
   sortByUpdated: () => {},
+  getFilteredNotes: () => [],
 });
 
 const useDiaryState = () => useContext(DiaryContext);
@@ -74,6 +78,11 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
     const newNotes = notes.filter((note: Note) => note.id !== id);
     setNotes(newNotes);
     saveState(newNotes);
+  };
+
+  const getFilteredNotes = (value: string) => {
+    if (value === '') return notes;
+    return notes.filter((note) => searchInEditorText(value, note.content));
   };
 
   const sortByCreated = (order: OrderDirection) => {
@@ -125,6 +134,7 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
       setSearchValue,
       sortByCreated,
       sortByUpdated,
+      getFilteredNotes,
       searchValue,
       sortBy,
     }),
@@ -132,12 +142,6 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
       notes,
       searchValue,
       sortBy,
-      addNote,
-      updateNote,
-      deleteNote,
-      setSearchValue,
-      sortByCreated,
-      sortByUpdated,
     ]
   );
 
