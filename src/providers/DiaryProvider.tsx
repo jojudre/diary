@@ -57,9 +57,7 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
   };
 
   const updateNote = (id: string, content: string) => {
-    const newNotes = notes.map((note: Note) =>
-      note.id === id ? { ...note, content } : note
-    );
+    const newNotes = notes.map((note: Note) => (note.id === id ? { ...note, content } : note));
     setNotes(newNotes);
     saveState(newNotes);
   };
@@ -77,15 +75,13 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
     });
     if (order === OrderDirection.ASC) {
       const newNotes = notes.sort(
-        (a: Note, b: Note) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        (a: Note, b: Note) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
       setNotes(newNotes);
       saveState(newNotes);
     } else {
       const newNotes = notes.sort(
-        (a: Note, b: Note) =>
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        (a: Note, b: Note) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
       );
       setNotes(newNotes);
       saveState(newNotes);
@@ -99,15 +95,13 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
     });
     if (order === OrderDirection.ASC) {
       const newNotes = notes.sort(
-        (a: Note, b: Note) =>
-          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        (a: Note, b: Note) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       );
       setNotes(newNotes);
       saveState(newNotes);
     } else {
       const newNotes = notes.sort(
-        (a: Note, b: Note) =>
-          new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
+        (a: Note, b: Note) => new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
       );
       setNotes(newNotes);
       saveState(newNotes);

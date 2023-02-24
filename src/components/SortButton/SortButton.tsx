@@ -1,6 +1,8 @@
 import SortIcon from 'icons/Sort';
 import ArrowIcon from 'icons/Arrow';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, {
+  FC, useEffect, useRef, useState
+} from 'react';
 import cn from 'classnames';
 import { OrderDirection, SortOrder } from 'types';
 import css from './SortButton.module.scss';
