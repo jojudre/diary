@@ -10,9 +10,14 @@ export enum OrderDirection {
   'DESC' = 'DESC',
 }
 
+export enum OrderBy {
+  'CREATED' = 'createdAt',
+  'UPDATED' = 'updatedAt',
+}
+
 export interface SortOrder {
-  createdAt: OrderDirection;
-  updatedAt: OrderDirection;
+  [OrderBy.CREATED]: OrderDirection;
+  [OrderBy.UPDATED]: OrderDirection;
 }
 
 export interface DiaryState {

@@ -6,7 +6,9 @@ import React, {
   useState,
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Note, OrderDirection, SortOrder } from 'types';
+import {
+  Note, OrderBy, OrderDirection, SortOrder
+} from 'types';
 import {
   formatDate, loadState, saveState, searchInEditorText
 } from 'utils';
@@ -20,8 +22,7 @@ interface DiaryContextValue {
   updateNote: (id: string, content: OutputData) => void;
   deleteNote: (id: string) => void;
   setSearchValue: (value: string) => void;
-  sortByCreated: (order: OrderDirection) => void;
-  sortByUpdated: (order: OrderDirection) => void;
+  sortNotes: (by: OrderBy, sortOrder: SortOrder) => void;
   getFilteredNotes: (value: string) => Note[];
 }
 
@@ -29,15 +30,14 @@ const DiaryContext = createContext<DiaryContextValue>({
   notes: [],
   searchValue: '',
   sortBy: {
-    createdAt: OrderDirection.ASC,
-    updatedAt: OrderDirection.ASC,
+    [OrderBy.CREATED]: OrderDirection.DESC,
+    [OrderBy.UPDATED]: OrderDirection.DESC,
   },
+  sortNotes: () => {},
   addNote: () => {},
   updateNote: () => {},
   deleteNote: () => {},
   setSearchValue: () => {},
-  sortByCreated: () => {},
-  sortByUpdated: () => {},
   getFilteredNotes: () => [],
 });
 
@@ -69,7 +69,7 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
   };
 
   const updateNote = (id: string, content: OutputData) => {
-    const newNotes = notes.map((note: Note) => (note.id === id ? { ...note, content: JSON.stringify(content) } : note));
+    const newNotes = notes.map((note: Note) => (note.id === id ? { ...note, content: JSON.stringify(content), updatedAt: formatDate(new Date()) } : note));
     setNotes(newNotes);
     saveState(newNotes);
   };
@@ -85,44 +85,22 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
     return notes.filter((note) => searchInEditorText(value, note.content));
   };
 
-  const sortByCreated = (order: OrderDirection) => {
+  const sortNotes = (by: OrderBy, newSort: SortOrder) => {
     setSortBy({
-      ...sortBy,
-      createdAt: order,
+      ...newSort
     });
-    if (order === OrderDirection.ASC) {
-      const newNotes = notes.sort(
-        (a: Note, b: Note) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    let newNotes;
+    if (newSort[by] === OrderDirection.ASC) {
+      newNotes = notes.sort(
+        (a: Note, b: Note) => new Date(b[by]).getTime() - new Date(a[by]).getTime()
       );
-      setNotes(newNotes);
-      saveState(newNotes);
     } else {
-      const newNotes = notes.sort(
-        (a: Note, b: Note) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      newNotes = notes.sort(
+        (a: Note, b: Note) => new Date(a[by]).getTime() - new Date(b[by]).getTime()
       );
-      setNotes(newNotes);
-      saveState(newNotes);
     }
-  };
-
-  const sortByUpdated = (order: OrderDirection) => {
-    setSortBy({
-      ...sortBy,
-      updatedAt: order,
-    });
-    if (order === OrderDirection.ASC) {
-      const newNotes = notes.sort(
-        (a: Note, b: Note) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-      );
-      setNotes(newNotes);
-      saveState(newNotes);
-    } else {
-      const newNotes = notes.sort(
-        (a: Note, b: Note) => new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
-      );
-      setNotes(newNotes);
-      saveState(newNotes);
-    }
+    setNotes(newNotes);
+    saveState(newNotes);
   };
 
   const providerValue = useMemo(
@@ -132,11 +110,10 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
       updateNote,
       deleteNote,
       setSearchValue,
-      sortByCreated,
-      sortByUpdated,
+      sortBy,
       getFilteredNotes,
       searchValue,
-      sortBy,
+      sortNotes,
     }),
     [
       notes,

@@ -4,47 +4,33 @@ import React, {
   FC, useEffect, useRef, useState
 } from 'react';
 import cn from 'classnames';
-import { OrderDirection, SortOrder } from 'types';
+import { OrderBy, OrderDirection, SortOrder } from 'types';
 import css from './SortButton.module.scss';
 
 type SortButtonProps = {
-  onSortByCreated: (orderDirection: OrderDirection) => void;
-  onSortByUpdated: (orderDirection: OrderDirection) => void;
+  onSort: (by: OrderBy, sort: SortOrder) => void;
 };
 
 const SortButton: FC<SortButtonProps> = ({
-  onSortByCreated,
-  onSortByUpdated,
+  onSort
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState<SortOrder>({
-    createdAt: OrderDirection.DESC,
-    updatedAt: OrderDirection.DESC,
+    [OrderBy.CREATED]: OrderDirection.DESC,
+    [OrderBy.UPDATED]: OrderDirection.DESC,
   });
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleClickSortByCreated = () => {
+  const handleClickSort = (by: OrderBy) => () => {
     const newSortOrder: SortOrder = {
       ...sortOrder,
-      createdAt:
-        sortOrder.createdAt === OrderDirection.ASC
+      [by]:
+        sortOrder[by] === OrderDirection.ASC
           ? OrderDirection.DESC
           : OrderDirection.ASC,
-    };
-    onSortByCreated(newSortOrder.createdAt);
-    setSortOrder({ ...newSortOrder });
-    setIsOpen(false);
-  };
 
-  const handleClickSortByUpdated = () => {
-    const newSortOrder: SortOrder = {
-      ...sortOrder,
-      updatedAt:
-        sortOrder.updatedAt === OrderDirection.ASC
-          ? OrderDirection.DESC
-          : OrderDirection.ASC,
     };
-    onSortByUpdated(newSortOrder.updatedAt);
+    onSort(by, newSortOrder);
     setSortOrder({ ...newSortOrder });
     setIsOpen(false);
   };
@@ -73,7 +59,7 @@ const SortButton: FC<SortButtonProps> = ({
         <div className={css.sortButtons}>
           <button
             type="button"
-            onClick={handleClickSortByCreated}
+            onClick={handleClickSort(OrderBy.CREATED)}
             className={css.sortButton}
           >
             <span>
@@ -87,7 +73,7 @@ const SortButton: FC<SortButtonProps> = ({
           </button>
           <button
             type="button"
-            onClick={handleClickSortByUpdated}
+            onClick={handleClickSort(OrderBy.UPDATED)}
             className={css.sortButton}
           >
             <span>

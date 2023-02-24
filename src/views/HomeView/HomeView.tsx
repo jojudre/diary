@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import Link from 'next/link';
-import { Note, OrderDirection } from 'types';
+import { Note } from 'types';
 import NoteItem from 'components/NoteItem';
 import AddNoteButton from 'components/AddNoteButton';
 import SearchBar from 'components/SearchBar';
@@ -10,13 +10,13 @@ import css from './HomeView.module.scss';
 
 const HomeView: FC = () => {
   const {
+    notes,
     searchValue,
     addNote,
     deleteNote,
     setSearchValue,
     getFilteredNotes,
-    sortByCreated,
-    sortByUpdated,
+    sortNotes,
   } = useDiaryState();
 
   const handleNoteDelete = (id: string) => () => {
@@ -27,15 +27,7 @@ const HomeView: FC = () => {
     setSearchValue(value);
   };
 
-  const filteredNotes = useMemo(() => getFilteredNotes(searchValue), [searchValue]);
-
-  const handleSortByCreated = (orderDirection: OrderDirection) => {
-    sortByCreated(orderDirection);
-  };
-
-  const handleSortByUpdated = (orderDirection: OrderDirection) => {
-    sortByUpdated(orderDirection);
-  };
+  const filteredNotes = useMemo(() => getFilteredNotes(searchValue), [searchValue, notes]);
 
   return (
     <div className={css.homePage}>
@@ -49,8 +41,7 @@ const HomeView: FC = () => {
           className={css.search}
         />
         <SortButton
-          onSortByCreated={handleSortByCreated}
-          onSortByUpdated={handleSortByUpdated}
+          onSort={sortNotes}
         />
       </div>
       <div className={css.notes}>
