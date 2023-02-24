@@ -70,10 +70,8 @@ const HomeView: FC = () => {
       </div>
       <div className={css.notes}>
         {filteredNotes.map((note: Note) => (
-          <Link href={note.id} key={note.id} legacyBehavior passHref>
-            <a href="replace">
-              <NoteItem note={note} onNoteDelete={handleNoteDelete(note.id)} />
-            </a>
+          <Link href={note.id} key={note.id}>
+            <NoteItem note={note} onNoteDelete={handleNoteDelete(note.id)} />
           </Link>
         ))}
       </div>
