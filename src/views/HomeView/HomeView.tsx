@@ -1,10 +1,9 @@
 import React, { FC, useMemo } from 'react';
 import Link from 'next/link';
-import { v4 as uuidv4 } from 'uuid';
 import { Note, OrderDirection } from 'types';
 import NoteItem from 'components/NoteItem';
 import AddNoteButton from 'components/AddNoteButton';
-import { formatDate, searchInEditorText } from 'utils';
+import { searchInEditorText } from 'utils';
 import SearchBar from 'components/SearchBar';
 import SortButton from 'components/SortButton';
 import { useDiaryState } from 'providers';
@@ -22,13 +21,7 @@ const HomeView: FC = () => {
   } = useDiaryState();
 
   const handleNoteCreate = () => {
-    const newNote: Note = {
-      id: uuidv4(),
-      content: '',
-      createdAt: formatDate(new Date()),
-      updatedAt: formatDate(new Date()),
-    };
-    addNote(newNote);
+    addNote();
   };
 
   const handleNoteDelete = (id: string) => () => {

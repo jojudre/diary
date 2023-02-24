@@ -33,3 +33,5 @@ export const searchInEditorText = (searchValue: string, content: string) => {
   }
   return blockWithSearchValue;
 };
+
+export const getParsedData = (data: string) => JSON.parse(data);

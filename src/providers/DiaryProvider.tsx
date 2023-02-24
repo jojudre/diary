@@ -5,15 +5,17 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { Note, OrderDirection, SortOrder } from 'types';
-import { loadState, saveState } from 'utils';
+import { formatDate, loadState, saveState } from 'utils';
+import { OutputData } from '@editorjs/editorjs';
 
 interface DiaryContextValue {
   notes: Note[];
   searchValue: string;
   sortBy: SortOrder;
-  addNote: (note: Note) => void;
-  updateNote: (id: string, content: string) => void;
+  addNote: () => void;
+  updateNote: (id: string, content: OutputData) => void;
   deleteNote: (id: string) => void;
   setSearchValue: (value: string) => void;
   sortByCreated: (order: OrderDirection) => void;
@@ -50,14 +52,20 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
     updatedAt: OrderDirection.ASC,
   });
 
-  const addNote = (note: Note) => {
-    const newNotes = [...notes, note];
+  const addNote = () => {
+    const newNote: Note = {
+      id: uuidv4(),
+      content: '',
+      createdAt: formatDate(new Date()),
+      updatedAt: formatDate(new Date()),
+    };
+    const newNotes = [...notes, newNote];
     setNotes(newNotes);
     saveState(newNotes);
   };
 
-  const updateNote = (id: string, content: string) => {
-    const newNotes = notes.map((note: Note) => (note.id === id ? { ...note, content } : note));
+  const updateNote = (id: string, content: OutputData) => {
+    const newNotes = notes.map((note: Note) => (note.id === id ? { ...note, content: JSON.stringify(content) } : note));
     setNotes(newNotes);
     saveState(newNotes);
   };

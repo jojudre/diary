@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import BackButton from 'components/BackButton';
 import { useDiaryState } from 'providers';
+import { getParsedData } from 'utils';
 import css from './NoteView.module.scss';
 
 const EditorBlock = dynamic(() => import('components/Editor'), {
@@ -19,13 +20,14 @@ const NoteView: FC = () => {
   const { notes, updateNote } = useDiaryState();
 
   const currentNote = useMemo(() => notes.find((note) => note.id === id), [id]);
+
   const currentNoteContent: OutputData = useMemo(
-    () => (currentNote?.content ? JSON.parse(currentNote.content) : null),
+    () => (currentNote?.content ? getParsedData(currentNote?.content) : null),
     [currentNote?.content]
   );
 
   const handleNoteUpdate = (data: OutputData) => {
-    updateNote(id as string, JSON.stringify(data));
+    updateNote(id as string, data);
   };
 
   return (
