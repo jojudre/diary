@@ -1,6 +1,4 @@
-import React, {
-  FC, memo, useEffect, useRef
-} from 'react';
+import React, { FC, memo, useEffect, useRef } from 'react';
 import EditorJS, { OutputData } from '@editorjs/editorjs';
 import { EDITOR_TOOLS } from './EditorTools';
 

@@ -41,7 +41,9 @@ const HomeView: FC = () => {
 
   const filteredNotes = useMemo(() => {
     if (searchValue === '') return notes;
-    return notes.filter((note) => searchInEditorText(searchValue, note.content));
+    return notes.filter((note) =>
+      searchInEditorText(searchValue, note.content)
+    );
   }, [notes, searchValue]);
 
   const handleSortByCreated = (orderDirection: OrderDirection) => {

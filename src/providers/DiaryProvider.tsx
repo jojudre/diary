@@ -1,5 +1,9 @@
 import React, {
-  createContext, useContext, useEffect, useMemo, useState
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
 } from 'react';
 import { Note, OrderDirection, SortOrder } from 'types';
 import { loadState, saveState } from 'utils';
@@ -53,7 +57,9 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
   };
 
   const updateNote = (id: string, content: string) => {
-    const newNotes = notes.map((note: Note) => (note.id === id ? { ...note, content } : note));
+    const newNotes = notes.map((note: Note) =>
+      note.id === id ? { ...note, content } : note
+    );
     setNotes(newNotes);
     saveState(newNotes);
   };
@@ -71,13 +77,15 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
     });
     if (order === OrderDirection.ASC) {
       const newNotes = notes.sort(
-        (a: Note, b: Note) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        (a: Note, b: Note) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
       setNotes(newNotes);
       saveState(newNotes);
     } else {
       const newNotes = notes.sort(
-        (a: Note, b: Note) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        (a: Note, b: Note) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
       );
       setNotes(newNotes);
       saveState(newNotes);
@@ -91,40 +99,48 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
     });
     if (order === OrderDirection.ASC) {
       const newNotes = notes.sort(
-        (a: Note, b: Note) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        (a: Note, b: Note) =>
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       );
       setNotes(newNotes);
       saveState(newNotes);
     } else {
       const newNotes = notes.sort(
-        (a: Note, b: Note) => new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
+        (a: Note, b: Note) =>
+          new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
       );
       setNotes(newNotes);
       saveState(newNotes);
     }
   };
 
-  const providerValue = useMemo(() => ({
-    notes,
-    addNote,
-    updateNote,
-    deleteNote,
-    setSearchValue,
-    sortByCreated,
-    sortByUpdated,
-    searchValue,
-    sortBy
-  }), [notes, searchValue, sortBy, addNote,
-    updateNote,
-    deleteNote,
-    setSearchValue,
-    sortByCreated,
-    sortByUpdated,]);
+  const providerValue = useMemo(
+    () => ({
+      notes,
+      addNote,
+      updateNote,
+      deleteNote,
+      setSearchValue,
+      sortByCreated,
+      sortByUpdated,
+      searchValue,
+      sortBy,
+    }),
+    [
+      notes,
+      searchValue,
+      sortBy,
+      addNote,
+      updateNote,
+      deleteNote,
+      setSearchValue,
+      sortByCreated,
+      sortByUpdated,
+    ]
+  );
 
   return (
-    <DiaryContext.Provider
-      value={providerValue}
-    >
+    <DiaryContext.Provider value={providerValue}>
       {children}
     </DiaryContext.Provider>
   );

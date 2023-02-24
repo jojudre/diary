@@ -1,8 +1,6 @@
 import SortIcon from 'icons/Sort';
 import ArrowIcon from 'icons/Arrow';
-import React, {
-  FC, useEffect, useRef, useState
-} from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { OrderDirection, SortOrder } from 'types';
 import css from './SortButton.module.scss';
@@ -71,7 +69,11 @@ const SortButton: FC<SortButtonProps> = ({
       </button>
       {isOpen && (
         <div className={css.sortButtons}>
-          <button type="button" onClick={handleClickSortByCreated} className={css.sortButton}>
+          <button
+            type="button"
+            onClick={handleClickSortByCreated}
+            className={css.sortButton}
+          >
             <span>
               <ArrowIcon
                 className={cn(css.arrowIcon, {
@@ -81,7 +83,11 @@ const SortButton: FC<SortButtonProps> = ({
             </span>
             Creation date
           </button>
-          <button type="button" onClick={handleClickSortByUpdated} className={css.sortButton}>
+          <button
+            type="button"
+            onClick={handleClickSortByUpdated}
+            className={css.sortButton}
+          >
             <span>
               <ArrowIcon
                 className={cn(css.arrowIcon, {

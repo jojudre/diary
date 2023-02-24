@@ -19,9 +19,7 @@ const EditorParser = ({ data }: Props) => {
     <div key={data.time} className={css.content}>
       {html.map((item, index) => {
         if (typeof item === 'string') {
-          return (
-            <div dangerouslySetInnerHTML={{ __html: item }} key={index} />
-          );
+          return <div dangerouslySetInnerHTML={{ __html: item }} key={index} />;
         }
         return item;
       })}
