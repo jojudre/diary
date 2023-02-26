@@ -19,6 +19,7 @@ const EditorBlock: FC<EditorBlockProps> = ({ data, onChange, holder }) => {
         holder,
         tools: EDITOR_TOOLS,
         data,
+        placeholder: 'Let`s write an awesome story!',
         async onChange(api) {
           const dataSave = await api.saver.save();
           onChange(dataSave);

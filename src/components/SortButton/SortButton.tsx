@@ -11,9 +11,7 @@ type SortButtonProps = {
   onSort: (by: OrderBy, sort: SortOrder) => void;
 };
 
-const SortButton: FC<SortButtonProps> = ({
-  onSort
-}) => {
+const SortButton: FC<SortButtonProps> = ({ onSort }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState<SortOrder>({
     [OrderBy.CREATED]: OrderDirection.DESC,
@@ -28,7 +26,6 @@ const SortButton: FC<SortButtonProps> = ({
         sortOrder[by] === OrderDirection.ASC
           ? OrderDirection.DESC
           : OrderDirection.ASC,
-
     };
     onSort(by, newSortOrder);
     setSortOrder({ ...newSortOrder });

@@ -69,7 +69,13 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
   };
 
   const updateNote = (id: string, content: OutputData) => {
-    const newNotes = notes.map((note: Note) => (note.id === id ? { ...note, content: JSON.stringify(content), updatedAt: formatDate(new Date()) } : note));
+    const newNotes = notes.map((note: Note) => (note.id === id
+      ? {
+        ...note,
+        content: JSON.stringify(content),
+        updatedAt: formatDate(new Date()),
+      }
+      : note));
     setNotes(newNotes);
     saveState(newNotes);
   };
@@ -87,7 +93,7 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
 
   const sortNotes = (by: OrderBy, newSort: SortOrder) => {
     setSortBy({
-      ...newSort
+      ...newSort,
     });
     let newNotes;
     if (newSort[by] === OrderDirection.ASC) {
@@ -115,11 +121,7 @@ const DiaryContextProvider: React.FC<{ children: any }> = ({ children }) => {
       searchValue,
       sortNotes,
     }),
-    [
-      notes,
-      searchValue,
-      sortBy,
-    ]
+    [notes, searchValue, sortBy]
   );
 
   return (

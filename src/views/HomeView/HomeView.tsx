@@ -23,11 +23,19 @@ const HomeView: FC = () => {
     deleteNote(id);
   };
 
+  const handleAddNote = () => {
+    addNote();
+    setSearchValue('');
+  };
+
   const handleSearchChange = (value: string) => {
     setSearchValue(value);
   };
 
-  const filteredNotes = useMemo(() => getFilteredNotes(searchValue), [searchValue, notes]);
+  const filteredNotes = useMemo(
+    () => getFilteredNotes(searchValue),
+    [searchValue, notes]
+  );
 
   return (
     <div className={css.homePage}>
@@ -40,9 +48,7 @@ const HomeView: FC = () => {
           onSearchChange={handleSearchChange}
           className={css.search}
         />
-        <SortButton
-          onSort={sortNotes}
-        />
+        <SortButton onSort={sortNotes} />
       </div>
       <div className={css.notes}>
         {filteredNotes.map((note: Note) => (
@@ -51,7 +57,7 @@ const HomeView: FC = () => {
           </Link>
         ))}
       </div>
-      <AddNoteButton onAddNote={addNote} />
+      <AddNoteButton onAddNote={handleAddNote} />
     </div>
   );
 };
